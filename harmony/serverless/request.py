@@ -12,6 +12,7 @@ from alibabacloud_tea_openapi import models as open_api_models
 from alibabacloud_fc20230330 import models as fc20230330_models
 from alibabacloud_tea_util import models as util_models
 import random
+import harmony.config as config
 
 
 def read_traces(file_name: str):
@@ -45,7 +46,6 @@ class Result:
 
 
 def generate_requests_helper(apps : List[util.App], batch_size: int, time_out: List[float], inter_arrival: List[float], duration_min: float, config: dict, ins : util.Instance, lat_cal, q : queue.Queue):
-    # All times in the file are in seconds.
     total_rps = sum(inter_arrival)
     weights : List[float] = [app.rps / total_rps for app in apps]
     indexes = list(range(len(apps)))
@@ -108,8 +108,6 @@ def generate_requests_helper(apps : List[util.App], batch_size: int, time_out: L
         time_stamp += delay
         if time_stamp >= duration_min * 60:
             break
-    
-    # print("duration time: ", time_stamp)
 
     for t in threads:
         t.join()
@@ -154,18 +152,23 @@ class Sample:
         function_name,
         cpu,
         mem,
-        gpu=None
-    ) -> bool:   
-        client = Sample.create_client("XXX", "XXX")
+        gpu = None 
+    ) -> bool:
+        conf = config.get_config()
+        access_key_id = conf["access_key_id"]
+        access_key_secret = conf["access_key_secret"]
+        client = Sample.create_client(access_key_id, access_key_secret)
         if gpu is None:
-            gpu_config = None
+            update_function_input = fc20230330_models.UpdateFunctionInput(
+                cpu=cpu,
+                memory_size=mem
+            )
         else:
-            gpu_config = fc20230330_models.GPUConfig(gpu)
-        update_function_input = fc20230330_models.UpdateFunctionInput(
-            cpu=cpu,
-            memory_size=mem,
-            gpu_config=gpu_config
-        )
+            update_function_input = fc20230330_models.UpdateFunctionInput(
+                cpu=cpu,
+                memory_size=mem,
+                gpu_config=fc20230330_models.GPUConfig(gpu * 1024, "fc.gpu.ampere.1")
+            )
         update_function_request = fc20230330_models.UpdateFunctionRequest(
             body=update_function_input
         )
@@ -173,7 +176,6 @@ class Sample:
         headers = {}
         succuess = True
         try:
-
             client.update_function_with_options(function_name, update_function_request, headers, runtime)
         except Exception as error:
             print(error)
@@ -210,7 +212,11 @@ class Function:
     def set_cfg(self, cfg : util.Cfg):
         if self.function_name != "":
             c = cfg.instance.cpu
+            # if c > 8:
+            #     c = round(c, 1)
             m = cfg.instance.mem
+            if m  < c:
+                m = c
             g = cfg.instance.gpu
             m = int(m * 1024)
             if m % 64 != 0:

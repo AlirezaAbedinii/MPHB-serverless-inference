@@ -2,9 +2,8 @@ import random
 import threading
 import requests
 import json
-from csinference.algorithm import batch
-import csinference.core.cost as cscost
-import csinference.core.util as util
+import harmony.core.cost as cscost
+import harmony.core.util as util
 
 class HttpFunction():
     def __init__(self, function_url, function_name=None) -> None:
@@ -71,7 +70,7 @@ class Serverless(threading.Thread):
     def send_test(self):
         lat_min = self.lat_cal.lat_avg(self.ins, len(self.requests))
         lat_max = self.lat_cal.lat_max(self.ins, len(self.requests))
-        return random.uniform(lat_min, lat_max)
+        return random.gauss(lat_min, (lat_max - lat_min) / 2.33)
 
     def run(self):
         if self.lat_cal is not None:

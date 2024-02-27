@@ -1,7 +1,8 @@
 import math
+import numpy as np
 from harmony.core.latency import Latency
 from harmony.core.util import Instance, batch_distribution
-from typing import List
+from typing import List, Tuple
 
 
 class FunctionCost():
@@ -35,14 +36,30 @@ class FunctionCost():
                            i+1, instance) * probability[i]
         return c
 
+class sort_helper:
+    def __init__(self, rps, t):
+        self.rps = rps
+        self.t = t
+def equivalent_timeout(timeouts : List[float], rps : List[float]) -> Tuple[float, float]:
+    assert len(timeouts) == len(rps)
+    n = len(timeouts)
+    if n == 1:
+        return timeouts[0], rps[0]
+    h = [sort_helper(rps[i], timeouts[i]) for i in range(n)]
+    h.sort(key=lambda x: x.t)
+    rps = [i.rps for i in h]
+    timeouts = [i.t for i in h]
+    rps_total = sum(rps)
+    if n == 2:
+        return timeouts[0] + rps[1] / rps_total * np.exp(-rps[0] * timeouts[1] - timeouts[0]), rps_total
+    else:
+        t, r = equivalent_timeout(timeouts[0:2], rps[0:2])
+        return equivalent_timeout([t] + timeouts[2:], [r] + rps[2:])
 
 class Multi_Cost(FunctionCost):
     def cost_with_multi_timeout_and_rps(self, time_out: List[float], rps: List[float], batch_max: int, lat_cal: Latency, instance: Instance) -> float:
         if batch_max == 1:
             return self.cost(lat_cal.lat_avg(instance, 1), 1, instance)
-        cost = 0
-        total_rps = sum(rps)
-        for i in range(len(time_out)):
-            p = batch_distribution(total_rps, batch_max, time_out[i])
-            cost += self.cost_with_probability(instance, p, lat_cal) * rps[i] / total_rps
-        return cost
+        t, r = equivalent_timeout(time_out, rps)
+        b_avg = min(batch_max, int(r * t) + 1)
+        return self.cost(lat_cal.lat_avg(instance, b_avg), b_avg, instance)

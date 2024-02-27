@@ -2,7 +2,6 @@ from typing import List, Tuple, Union
 import math
 from harmony.core.util import Instance, batch_distribution
 import numpy as np
-
 from abc import ABC, abstractmethod
 
 
@@ -116,7 +115,7 @@ class GPULatency(Latency):
         L = self.g1 * batch_size + self.g2
         L1 = L * a
         L2 = L * b
-        L = L1 
+        L = L1
         return self.G / gpu * L + L2 / c
 
     def lat_max(self, instance: Instance, batch_size: int, scale = 1.2, a : Union[float, None] = None, b : Union[float, None] = None)->float:
@@ -141,8 +140,9 @@ class GPULatency(Latency):
         L1 = L * a
         L2 = L * b
         L = L1 
-        n = math.floor(L / (gpu * self.t))
-        return ((self.G - gpu) * (n+1) * self.t + L) * scale + L2 / c
+        n = math.ceil(L / (gpu * self.t))
+        # scale: overhead
+        return ((self.G - gpu) * n * self.t + L) * scale + L2 / c
 
 class GPULatency_AVG(GPULatency):
     def lat_max(self, instance: Instance, batch_size: int, scale = 1.2, a : Union[float, None] = None, b : Union[float, None] = None)->float:

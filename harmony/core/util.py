@@ -16,7 +16,7 @@ def batch_distribution(lam: float, B: int, T: float) -> List[float]:
                 Q[i][j] = lam
 
     p = [0.0] * B
-    pTmp = np.dot(init_state, expm(Q * T))
+    pTmp = np.dot(np.array(init_state), expm(Q * T))
     for i in range(B):
         if i < B-1:
             p[i] = pTmp[i]
@@ -36,7 +36,7 @@ class Mem:
 
     def get_mem(self, cpu, mem):
         mem = mem / 1024
-        if cpu > mem * 4:
+        if 4 * cpu < mem:
             return None
         elif cpu > mem:
             mem = cpu
@@ -103,33 +103,31 @@ class Instance:
 
 
 class Cfg:
-    def __init__(self, instance: Instance, batch_size: int, cost: float, rps: Union[float, List[float]], slo: Union[float, List[float]], timeout: Union[float, List[float]], latency: float) -> None:
+    def __init__(self, instance: Instance, batch_size: int, cost: float, 
+                rps: Union[float, List[float]], slo: Union[float, List[float]], 
+                timeout: Union[float, List[float]]) -> None:
         self.instance = instance
         self.batch_size = batch_size
         self.cost = cost
         self.rps = rps
         self.timeout = timeout
         self.slo = slo
-        self.latency = latency
-        self.ratio = 1
 
     def set_apps(self, apps):
         self.apps = apps
 
     def __str__(self):
-        ret = "cpu:\t\t{%0.2f}" % self.instance.cpu + "\n" + \
-            "mem:\t\t{%0.2f}" % self.instance.mem + "\n" + \
-            "batch:\t\t{%d}" % self.batch_size + "\n" + \
+        ret = "cpu:\t\t%0.2f" % self.instance.cpu + "\n" + \
+            "batch:\t\t%d" % self.batch_size + "\n" + \
             "rps:\t\t" + str(self.rps) + "\n" + \
             "timeout:\t" + str(self.timeout) + "\n" + \
-            "cost:\t\t{%0.3e}" % self.cost + "\n" \
-            "latency:\t{%0.3f}" % self.latency + "\n" + \
-            "slo:\t\t" + str(self.slo) + "\n" + \
-            "ratio\t\t{%0.2f}" % self.ratio + "\n"
+            "cost:\t\t%0.3e" % self.cost + "\n" \
+            "slo:\t\t" + str(self.slo) + "\n"
 
         if self.instance.gpu is not None:
-            ret = "gpu:\t\t{%d}" % self.instance.gpu + "\n" + ret
-        return ret
+            ret = "gpu:\t\t%d" % self.instance.gpu + "\n" + ret
+        return "\n" + ret
+        # return "\n---------------------------------\n" + ret + "---------------------------------\n"
     
     def update(self, cfg : Union["Cfg", None]):
         if cfg is not None and cfg.cost < self.cost:
@@ -139,60 +137,7 @@ class Cfg:
             self.rps = cfg.rps
             self.timeout = cfg.timeout
             self.slo = cfg.slo
-            self.latency = cfg.latency
         return self
-    
-    def set_ratio(self, ratio : float):
-        self.ratio = ratio
-
-
-class Cfgs:
-    def __init__(self, *cfgs: Cfg) -> None:
-        self.cfgs = list(cfgs)
-
-    def set_com(self, com):
-        self.com = com
-    
-    def update(self, cfgs : "Cfgs"):
-        if len(self.cfgs) == 0:
-            self.cfgs = cfgs.cfgs
-            self.com = cfgs.com
-        elif len(cfgs.cfgs) > 0 and self.cost() > cfgs.cost():
-            self.cfgs = cfgs.cfgs
-            self.com = cfgs.com
-
-    
-    def add(self, cfg : Cfg):
-        self.cfgs.append(cfg)
-
-    def cost(self) -> float:
-        cost = 0
-        for cfg in self.cfgs:
-            cost += cfg.cost * cfg.ratio
-        return cost
-
-    def lat(self):
-        lat = 0
-        for cfg in self.cfgs:
-            lat += cfg.latency * cfg.ratio
-        return lat
-
-    def __str__(self):
-        ret = ""
-        ret += "-" * 24 + "\n"
-        for cfg in self.cfgs:
-            ret += str(cfg)
-            ret += "-" * 24 + "\n"
-        if ret == "":
-            return "None\n"
-        ret = "total cost:\t{%0.3e}" % self.cost() + "\n" + \
-            "total latency:\t{%0.3f}" % self.lat() + "\n" + \
-            str(self.com) + "\n" + ret
-        return "*" * 24 + "\n" + ret + "*" * 24 + "\n"
-    
-    def __repr__(self):
-        return self.__str__()
-
 
 class App:
     def __init__(self, name: str, slo: float, rps: float) -> None:
@@ -210,6 +155,7 @@ class App:
 class Apps:
     def __init__(self, apps: List[App]) -> None:
         self.apps = apps
+        self.threshold = None
         if len(apps) > 0:
             self.apps_rps = sum(app.rps for app in self.apps)
             self.slo = min(self.apps, key=lambda x: x.slo).slo
