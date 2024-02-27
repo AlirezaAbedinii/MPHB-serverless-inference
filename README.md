@@ -8,12 +8,12 @@ _HarmonyBatch_  comprises mainly three modules: a model profiler, a performance 
 ![prototype](images/framework.png)
 
 ## Model the Optimization Problem
-Given a set of inference applications $\mathcal{W} = \{w_1, w_2, ...., w_n\}$ sharing the same DNN model with the inference latency SLO $\mathcal{L} = \{l^{w_1}, l^{w_2}, ..., l^{w_n}\}$ and request arrival rates $\mathcal{R} = \{r^{w_1}, r^{w_2}, ..., r^{w_n}\}$. We categorize the application set $\mathcal{W}$ into several groups $\mathcal{G} = \{\mathcal{X}_1, \mathcal{X}_2, ..., \mathcal{X}_m\}$. Each group $\mathcal{X} = \{w_j, w_{j+1}, ...\}$ is provisioned with an appropriate CPU or GPU function, with the aim of meeting application SLO requirements while minimizing the total monetary cost. 
+Given a set of inference applications $\mathcal{W} = {w_1, w_2, ...., w_n}$ sharing the same DNN model with the inference latency SLO $\mathcal{L} = {l^{w_1}, l^{w_2}, ..., l^{w_n}}$ and request arrival rates $\mathcal{R} = {r^{w_1}, r^{w_2}, ..., r^{w_n}}$. We categorize the application set $\mathcal{W}$ into several groups $\mathcal{G} = \{\mathcal{X}_{1}, \mathcal{X}_{2}, ..., \mathcal{X}_{m}\}$. Each group $\mathcal{X} = {w_{j}, w_{j+1}, ...}$ is provisioned with an appropriate CPU or GPU function, with the aim of meeting application SLO requirements while minimizing the total monetary cost. 
 Based on our DNN inference performance and cost models, we can formulate the optimization problem as
 $$
 \begin{align}
     \min_{\mathcal{G}, \mathcal{F}, \mathcal{B}, \mathcal{T}}  Cost = & \sum_{\mathcal{X} \in \mathcal{G}} \eta^{\mathcal{X}} \cdot C^{\mathcal{X}} \\
-    \text{s.t.} \ \ \ \ 
+    s.t. \ \ \ \ 
     &  M^{\mathcal{X}} \leq m^{\mathcal{X}}, \  \forall \ \mathcal{X} \in \mathcal{G} \\
     &  t^w + L_{max}^{t} \leq l^w, \  \forall \ w \in \mathcal{X}, \ \mathcal{X} \in \mathcal{G}
 \end{align}
