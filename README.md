@@ -8,7 +8,7 @@ _HarmonyBatch_  comprises mainly three modules: a model profiler, a performance 
 ![prototype](images/framework.png)
 
 ## Model the Optimization Problem
-Given a set of inference applications $\mathcal{W} = {w_1, w_2, ...., w_n}$ sharing the same DNN model with the inference latency SLO $\mathcal{L} = {l^{w_1}, l^{w_2}, ..., l^{w_n}}$ and request arrival rates $\mathcal{R} = {r^{w_1}, r^{w_2}, ..., r^{w_n}}$. We categorize the application set $\mathcal{W}$ into several groups $\mathcal{G} = \{\mathcal{X}_{1}, \mathcal{X}_{2}, ..., \mathcal{X}_{m}\}$. Each group $\mathcal{X} = {w_{j}, w_{j+1}, ...}$ is provisioned with an appropriate CPU or GPU function, with the aim of meeting application SLO requirements while minimizing the total monetary cost. 
+Given a set of inference applications $\mathcal{W} = \{w_{1}, w_{2}, ...., w_{n}\}$ sharing the same DNN model with the inference latency SLO $\mathcal{L} = \{l^{w_1}, l^{w_2}, ..., l^{w_n}\}$ and request arrival rates $\mathcal{R} = \{r^{w_1}, r^{w_2}, ..., r^{w_n}\}$. We categorize the application set $\mathcal{W}$ into several groups $\mathcal{G} = \{\mathcal{X}_{1}, \mathcal{X}_{2}, ..., \mathcal{X}_{m}\}$. Each group $\mathcal{X} = \{w_{j}, w_{j+1}, ...\}$ is provisioned with an appropriate CPU or GPU function, with the aim of meeting application SLO requirements while minimizing the total monetary cost. 
 Based on our DNN inference performance and cost models, we can formulate the optimization problem as
 $$
 \begin{align}
@@ -33,7 +33,7 @@ pip install requirements.txt
 
 #### Test the Algorithm
 
-Set up the model name (i.g., VGG-19) and algorithm name (i.g., HarmonyBatch) within the configuration file in `conf/config.json`.
+Set up the model name (i.g., VGG19) and algorithm name (i.g., HarmonyBatch) within the configuration file in `conf/config.json`.
 Set the application SLOs and arrival rates in `main.py` and run the algorithm: 
 ```python
 cd HarmonyBatch
