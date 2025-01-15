@@ -71,8 +71,8 @@ if __name__ == "__main__":
 
     
     # init function client 
-    default_cpu_cfg = Cfg(harmony.Instance(16, 32, None), 1, 1, 1, 1, 1, 1)
-    default_gpu_cfg = Cfg(harmony.Instance(16, 32, 24), 1, 1, 1, 1, 1, 1)
+    default_cpu_cfg = Cfg(harmony.Instance(16, 32, None), 1, 1, 1, 1, 1) #edited by A
+    default_gpu_cfg = Cfg(harmony.Instance(16, 32, 24), 1, 1, 1, 1, 1) # edited by A
     cpu_functions : List[Union[csreqest.Function, None]] = []
     # Put the function name and function url here for real serverless inference
     # This is for simulation, so we don't put the real function name and url here

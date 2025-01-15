@@ -250,3 +250,47 @@ class Function:
         requests_result = self.q.get()
         return Result(self.cfg, requests_result)
 
+# class Function:
+#     def __init__(self, function_name: str, function_url: str, cfg: util.Cfg, config: dict) -> None:
+#         self.function_name = function_name
+#         self.function_url = function_url
+#         self.cfg = cfg
+#         self.threads = []
+#         self.q = queue.Queue()
+#         self.config = config
+
+#         print(f"Simulated: Initialized function {function_name} with config {cfg}.")
+
+#     def eq_cfg(self, cfg: util.Cfg):
+#         # Simulate configuration equality check
+#         return self.cfg == cfg
+
+#     def bind_cfg(self, cfg: util.Cfg):
+#         self.cfg = cfg
+#         print(f"Simulated: Bound new config to function {self.function_name}.")
+
+#     def set_cfg(self, cfg: util.Cfg):
+#         # Simulate setting new configuration
+#         print(f"Simulated: Setting config for {self.function_name} with CPU: {cfg.instance.cpu}, "
+#               f"Memory: {cfg.instance.mem}, GPU: {cfg.instance.gpu}.")
+#         self.cfg = cfg
+
+#     def start(self, duration_min: int):
+#         print(f"Simulated: Starting function {self.function_name} for {duration_min} minutes.")
+#         # Simulate request processing
+#         t = threading.Thread(target=self._simulate_processing, args=(duration_min,))
+#         t.start()
+#         self.threads.append(t)
+
+#     def _simulate_processing(self, duration_min: int):
+#         # Simulate some work by sleeping
+#         time.sleep(duration_min * 60)
+#         print(f"Simulated: Function {self.function_name} completed processing.")
+
+#     def finish(self):
+#         for t in self.threads:
+#             t.join()
+#         self.threads = []
+#         print(f"Simulated: Function {self.function_name} finished.")
+#         # Return a simulated result
+#         return Result(self.cfg, [])

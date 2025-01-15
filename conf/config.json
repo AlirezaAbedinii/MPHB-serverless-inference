@@ -5,15 +5,15 @@
 
     "duration_min": 10,
     "app_num": 4,
-    "slos": [0.3, 0.5, 0.8, 1.0],
+    "slos": [0.9, 1.5, 2.4, 3.0],
 
     "cfg_path": "conf",
     "app_path": "app",
 
-    "Res_CPU":[0.05, 16],
-    "Res_GPU": [1, 24],
-    "B_CPU":[1, 4],
-    "B_GPU": [1, 32],
+    "Res_CPU":[0.05, 2],
+    "Res_GPU": [0, 0],
+    "B_CPU":[1, 2],
+    "B_GPU": [0, 0],
 
     "access_key_id": "XXXXXXXXXXXX",
     "access_key_secret": "XXXXXXXXXXXX"
