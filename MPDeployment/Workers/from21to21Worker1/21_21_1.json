@@ -1,0 +1,82 @@
+{
+  "nodes": [
+    {
+      "op": "null", 
+      "name": "flatten_72", 
+      "inputs": []
+    }, 
+    {
+      "op": "Flatten", 
+      "name": "flatten1", 
+      "inputs": [[0, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_dense0_weight", 
+      "attrs": {"__shape__": "(2048, 25088)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "_linalg_gemm2", 
+      "name": "linalg_gemm21", 
+      "attrs": {
+        "alpha": "1.0", 
+        "transpose_a": "0", 
+        "transpose_b": "1"
+      }, 
+      "inputs": [[1, 0, 0], [2, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_dense0_bias", 
+      "attrs": {"__shape__": "(2048,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "_mul_scalar", 
+      "name": "_mulscalar1", 
+      "attrs": {"scalar": "1.0"}, 
+      "inputs": [[4, 0, 0]]
+    }, 
+    {
+      "op": "broadcast_add", 
+      "name": "broadcast_add1", 
+      "inputs": [[3, 0, 0], [5, 0, 0]]
+    }, 
+    {
+      "op": "relu", 
+      "name": "vgg0_dense0_relu_fwd", 
+      "inputs": [[6, 0, 0]]
+    }, 
+    {
+      "op": "Dropout", 
+      "name": "vgg0_dropout0_fwd", 
+      "attrs": {
+        "mode": "training", 
+        "p": "0.5"
+      }, 
+      "inputs": [[7, 0, 0]]
+    }, 
+    {
+      "op": "Flatten", 
+      "name": "flatten_77", 
+      "inputs": [[8, 0, 0]]
+    }
+  ], 
+  "arg_nodes": [0, 2, 4], 
+  "node_row_ptr": [
+    0, 
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6, 
+    7, 
+    8, 
+    10, 
+    11
+  ], 
+  "heads": [[9, 0, 0]], 
+  "attrs": {"mxnet_version": ["int", 10500]}
+}

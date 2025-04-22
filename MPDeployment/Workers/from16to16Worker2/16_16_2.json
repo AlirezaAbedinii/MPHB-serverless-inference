@@ -1,0 +1,52 @@
+{
+  "nodes": [
+    {
+      "op": "null", 
+      "name": "vgg0_pool3_fwd", 
+      "inputs": []
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad26", 
+      "attrs": {
+        "mode": "constant", 
+        "pad_width": "(0, 0, 0, 0, 0, 1, 1, 0)"
+      }, 
+      "inputs": [[0, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv12_weight", 
+      "attrs": {"__shape__": "(512, 512, 3, 3)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv12_bias", 
+      "attrs": {"__shape__": "(512,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "Convolution", 
+      "name": "convolution18", 
+      "attrs": {
+        "dilate": "(1, 1)", 
+        "kernel": "(3, 3)", 
+        "no_bias": "False", 
+        "num_filter": "512", 
+        "num_group": "1", 
+        "stride": "(1, 1)"
+      }, 
+      "inputs": [[1, 0, 0], [2, 0, 0], [3, 0, 0]]
+    }, 
+    {
+      "op": "relu", 
+      "name": "vgg0_relu12_fwd", 
+      "inputs": [[4, 0, 0]]
+    }
+  ], 
+  "arg_nodes": [0, 2, 3], 
+  "node_row_ptr": [0, 1, 2, 3, 4, 5, 6], 
+  "heads": [[5, 0, 0]], 
+  "attrs": {"mxnet_version": ["int", 10500]}
+}

@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {
+      "op": "null", 
+      "name": "vgg0_relu15_fwd", 
+      "inputs": []
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad31", 
+      "attrs": {
+        "mode": "edge", 
+        "pad_width": "(0, 0, 0, 0, 0, 0, 0, 0)"
+      }, 
+      "inputs": [[0, 0, 0]]
+    }, 
+    {
+      "op": "Pooling", 
+      "name": "pooling8", 
+      "attrs": {
+        "kernel": "(2, 2)", 
+        "pool_type": "max", 
+        "stride": "(2, 2)"
+      }, 
+      "inputs": [[1, 0, 0]]
+    }, 
+    {
+      "op": "Flatten", 
+      "name": "flatten_72", 
+      "inputs": [[2, 0, 0]]
+    }
+  ], 
+  "arg_nodes": [0], 
+  "node_row_ptr": [0, 1, 2, 3, 4], 
+  "heads": [[3, 0, 0]], 
+  "attrs": {"mxnet_version": ["int", 10500]}
+}
