@@ -1,0 +1,27 @@
+This project contains code and ideas derived from the following open-source research projects:
+
+---
+
+**Gillis: Serving Large Neural Networks in Serverless
+Functions with Automatic Model Partitioning**  
+Original repository: https://github.com/MincYu/gillis-open-source  
+Authors: Minchen Yu, Zhifeng Jiang, et al.
+
+---
+
+**HarmonyBatch: Batching multi-SLO DNN Inference with Heterogeneous Serverless Functions**   
+Codebase repository: https://github.com/icloud-ecnu/HarmonyBatch
+Authors: Jiabin Chen, Fei Xu, et al.
+
+---
+
+Modifications and extensions have been made to the original codebases. These include:
+
+- Adaptation for Alibaba Cloud Function Compute
+- GPU accelerator support
+- Batched inference support
+- Prewarming and performance logging
+- Improvements to concurrency control and request retry
+
+This project is intended for non-commercial, research-oriented use only.  
+All rights in the original Gillis and HarmonyBatch code remain with their respective authors.

@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {
+      "op": "null", 
+      "name": "vgg0_relu11_fwd", 
+      "inputs": []
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad22", 
+      "attrs": {
+        "mode": "edge", 
+        "pad_width": "(0, 0, 0, 0, 0, 0, 0, 0)"
+      }, 
+      "inputs": [[0, 0, 0]]
+    }, 
+    {
+      "op": "Pooling", 
+      "name": "pooling6", 
+      "attrs": {
+        "kernel": "(2, 2)", 
+        "pool_type": "max", 
+        "stride": "(2, 2)"
+      }, 
+      "inputs": [[1, 0, 0]]
+    }
+  ], 
+  "arg_nodes": [0], 
+  "node_row_ptr": [0, 1, 2, 3], 
+  "heads": [[2, 0, 0]], 
+  "attrs": {"mxnet_version": ["int", 10500]}
+}

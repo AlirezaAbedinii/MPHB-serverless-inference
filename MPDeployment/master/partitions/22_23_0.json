@@ -1,0 +1,126 @@
+{
+  "nodes": [
+    {
+      "op": "null", 
+      "name": "flatten_77", 
+      "inputs": []
+    }, 
+    {
+      "op": "Flatten", 
+      "name": "flatten2", 
+      "inputs": [[0, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_dense1_weight", 
+      "attrs": {"__shape__": "(4096, 4096)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "_linalg_gemm2", 
+      "name": "linalg_gemm22", 
+      "attrs": {
+        "alpha": "1.0", 
+        "transpose_a": "0", 
+        "transpose_b": "1"
+      }, 
+      "inputs": [[1, 0, 0], [2, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_dense1_bias", 
+      "attrs": {"__shape__": "(4096,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "_mul_scalar", 
+      "name": "_mulscalar2", 
+      "attrs": {"scalar": "1.0"}, 
+      "inputs": [[4, 0, 0]]
+    }, 
+    {
+      "op": "broadcast_add", 
+      "name": "broadcast_add2", 
+      "inputs": [[3, 0, 0], [5, 0, 0]]
+    }, 
+    {
+      "op": "relu", 
+      "name": "vgg0_dense1_relu_fwd", 
+      "inputs": [[6, 0, 0]]
+    }, 
+    {
+      "op": "Dropout", 
+      "name": "vgg0_dropout1_fwd", 
+      "attrs": {
+        "mode": "training", 
+        "p": "0.5"
+      }, 
+      "inputs": [[7, 0, 0]]
+    }, 
+    {
+      "op": "Flatten", 
+      "name": "flatten_82", 
+      "inputs": [[8, 0, 0]]
+    }, 
+    {
+      "op": "Flatten", 
+      "name": "flatten3", 
+      "inputs": [[9, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_dense2_weight", 
+      "attrs": {"__shape__": "(1000, 4096)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "_linalg_gemm2", 
+      "name": "linalg_gemm23", 
+      "attrs": {
+        "alpha": "1.0", 
+        "transpose_a": "0", 
+        "transpose_b": "1"
+      }, 
+      "inputs": [[10, 0, 0], [11, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_dense2_bias", 
+      "attrs": {"__shape__": "(1000,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "_mul_scalar", 
+      "name": "_mulscalar3", 
+      "attrs": {"scalar": "1.0"}, 
+      "inputs": [[13, 0, 0]]
+    }, 
+    {
+      "op": "broadcast_add", 
+      "name": "broadcast_add3", 
+      "inputs": [[12, 0, 0], [14, 0, 0]]
+    }
+  ], 
+  "arg_nodes": [0, 2, 4, 11, 13], 
+  "node_row_ptr": [
+    0, 
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6, 
+    7, 
+    8, 
+    10, 
+    11, 
+    12, 
+    13, 
+    14, 
+    15, 
+    16, 
+    17
+  ], 
+  "heads": [[15, 0, 0]], 
+  "attrs": {"mxnet_version": ["int", 10500]}
+}

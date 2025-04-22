@@ -1,0 +1,71 @@
+{
+  "nodes": [
+    {
+      "op": "null", 
+      "name": "vgg0_relu0_fwd", 
+      "inputs": []
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad1", 
+      "attrs": {
+        "mode": "constant", 
+        "pad_width": "(0, 0, 0, 0, 1, 1, 1, 0)"
+      }, 
+      "inputs": [[0, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv1_weight", 
+      "attrs": {"__shape__": "(64, 64, 3, 3)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv1_bias", 
+      "attrs": {"__shape__": "(64,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "Convolution", 
+      "name": "convolution1", 
+      "attrs": {
+        "dilate": "(1, 1)", 
+        "kernel": "(3, 3)", 
+        "no_bias": "False", 
+        "num_filter": "64", 
+        "num_group": "1", 
+        "stride": "(1, 1)"
+      }, 
+      "inputs": [[1, 0, 0], [2, 0, 0], [3, 0, 0]]
+    }, 
+    {
+      "op": "relu", 
+      "name": "vgg0_relu1_fwd", 
+      "inputs": [[4, 0, 0]]
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad2", 
+      "attrs": {
+        "mode": "edge", 
+        "pad_width": "(0, 0, 0, 0, 0, 0, 0, 0)"
+      }, 
+      "inputs": [[5, 0, 0]]
+    }, 
+    {
+      "op": "Pooling", 
+      "name": "pooling0", 
+      "attrs": {
+        "kernel": "(2, 2)", 
+        "pool_type": "max", 
+        "stride": "(2, 2)"
+      }, 
+      "inputs": [[6, 0, 0]]
+    }
+  ], 
+  "arg_nodes": [0, 2, 3], 
+  "node_row_ptr": [0, 1, 2, 3, 4, 5, 6, 7, 8], 
+  "heads": [[7, 0, 0]], 
+  "attrs": {"mxnet_version": ["int", 10500]}
+}

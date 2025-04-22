@@ -1,0 +1,472 @@
+{
+  "stage_list": [
+    {
+      "name": "0_0",
+      "coordinate": "0_0",
+      "partition_shape": [
+        1,
+        1
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            3,
+            224,
+            224
+          ],
+          "input_name": "data",
+          "location": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "function_id": 0
+        }
+      ]
+    },
+    {
+      "name": "1_2",
+      "coordinate": "1_2",
+      "partition_shape": [
+        1,
+        2
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            64,
+            224,
+            113
+          ],
+          "input_name": "vgg0_relu0_fwd",
+          "location": [
+            1,
+            1,
+            1,
+            0
+          ],
+          "function_id": 0
+        },
+        {
+          "input_shape": [
+            1,
+            64,
+            224,
+            113
+          ],
+          "input_name": "vgg0_relu0_fwd",
+          "location": [
+            1,
+            0,
+            1,
+            1
+          ],
+          "function_id": 1
+        }
+      ]
+    },
+    {
+      "name": "3_10",
+      "coordinate": "3_10",
+      "partition_shape": [
+        1,
+        1
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            64,
+            112,
+            112
+          ],
+          "input_name": "vgg0_pool0_fwd",
+          "location": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "function_id": 0
+        }
+      ]
+    },
+    {
+      "name": "11_11",
+      "coordinate": "11_11",
+      "partition_shape": [
+        2,
+        2
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            256,
+            15,
+            15
+          ],
+          "input_name": "vgg0_pool2_fwd",
+          "location": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "function_id": 0
+        },
+        {
+          "input_shape": [
+            1,
+            256,
+            15,
+            15
+          ],
+          "input_name": "vgg0_pool2_fwd",
+          "location": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "function_id": 1
+        },
+        {
+          "input_shape": [
+            1,
+            256,
+            15,
+            15
+          ],
+          "input_name": "vgg0_pool2_fwd",
+          "location": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "function_id": 2
+        },
+        {
+          "input_shape": [
+            1,
+            256,
+            15,
+            15
+          ],
+          "input_name": "vgg0_pool2_fwd",
+          "location": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "function_id": 3
+        }
+      ]
+    },
+    {
+      "name": "12_14",
+      "coordinate": "12_14",
+      "partition_shape": [
+        1,
+        1
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "input_name": "vgg0_relu8_fwd",
+          "location": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "function_id": 0
+        }
+      ]
+    },
+    {
+      "name": "15_15",
+      "coordinate": "15_15",
+      "partition_shape": [
+        2,
+        2
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu11_fwd",
+          "location": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "function_id": 0
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu11_fwd",
+          "location": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "function_id": 1
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu11_fwd",
+          "location": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "function_id": 2
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu11_fwd",
+          "location": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "function_id": 3
+        }
+      ]
+    },
+    {
+      "name": "16_16",
+      "coordinate": "16_16",
+      "partition_shape": [
+        2,
+        2
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            512,
+            8,
+            8
+          ],
+          "input_name": "vgg0_pool3_fwd",
+          "location": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "function_id": 0
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            8,
+            8
+          ],
+          "input_name": "vgg0_pool3_fwd",
+          "location": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "function_id": 1
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            8,
+            8
+          ],
+          "input_name": "vgg0_pool3_fwd",
+          "location": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "function_id": 2
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            8,
+            8
+          ],
+          "input_name": "vgg0_pool3_fwd",
+          "location": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "function_id": 3
+        }
+      ]
+    },
+    {
+      "name": "17_19",
+      "coordinate": "17_19",
+      "partition_shape": [
+        1,
+        1
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu12_fwd",
+          "location": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "function_id": 0
+        }
+      ]
+    },
+    {
+      "name": "20_20",
+      "coordinate": "20_20",
+      "partition_shape": 4,
+      "models": [
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu15_fwd",
+          "location": 0,
+          "function_id": 0
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu15_fwd",
+          "location": 1,
+          "function_id": 1
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu15_fwd",
+          "location": 2,
+          "function_id": 2
+        },
+        {
+          "input_shape": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "input_name": "vgg0_relu15_fwd",
+          "location": 3,
+          "function_id": 3
+        }
+      ]
+    },
+    {
+      "name": "21_21",
+      "coordinate": "21_21",
+      "partition_shape": 2,
+      "models": [
+        {
+          "input_shape": [
+            1,
+            25088
+          ],
+          "input_name": "flatten_72",
+          "location": 0,
+          "function_id": 0
+        },
+        {
+          "input_shape": [
+            1,
+            25088
+          ],
+          "input_name": "flatten_72",
+          "location": 1,
+          "function_id": 1
+        }
+      ]
+    },
+    {
+      "name": "22_23",
+      "coordinate": "22_23",
+      "partition_shape": [
+        1,
+        1
+      ],
+      "models": [
+        {
+          "input_shape": [
+            1,
+            4096
+          ],
+          "input_name": "flatten_77",
+          "location": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "function_id": 0
+        }
+      ]
+    }
+  ]
+}

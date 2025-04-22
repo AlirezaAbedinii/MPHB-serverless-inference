@@ -1,0 +1,148 @@
+{
+  "nodes": [
+    {
+      "op": "null", 
+      "name": "vgg0_relu8_fwd", 
+      "inputs": []
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad17", 
+      "attrs": {
+        "mode": "constant", 
+        "pad_width": "(0, 0, 0, 0, 1, 1, 1, 1)"
+      }, 
+      "inputs": [[0, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv9_weight", 
+      "attrs": {"__shape__": "(512, 512, 3, 3)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv9_bias", 
+      "attrs": {"__shape__": "(512,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "Convolution", 
+      "name": "convolution13", 
+      "attrs": {
+        "dilate": "(1, 1)", 
+        "kernel": "(3, 3)", 
+        "no_bias": "False", 
+        "num_filter": "512", 
+        "num_group": "1", 
+        "stride": "(1, 1)"
+      }, 
+      "inputs": [[1, 0, 0], [2, 0, 0], [3, 0, 0]]
+    }, 
+    {
+      "op": "relu", 
+      "name": "vgg0_relu9_fwd", 
+      "inputs": [[4, 0, 0]]
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad18", 
+      "attrs": {
+        "mode": "constant", 
+        "pad_width": "(0, 0, 0, 0, 1, 1, 1, 1)"
+      }, 
+      "inputs": [[5, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv10_weight", 
+      "attrs": {"__shape__": "(512, 512, 3, 3)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv10_bias", 
+      "attrs": {"__shape__": "(512,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "Convolution", 
+      "name": "convolution14", 
+      "attrs": {
+        "dilate": "(1, 1)", 
+        "kernel": "(3, 3)", 
+        "no_bias": "False", 
+        "num_filter": "512", 
+        "num_group": "1", 
+        "stride": "(1, 1)"
+      }, 
+      "inputs": [[6, 0, 0], [7, 0, 0], [8, 0, 0]]
+    }, 
+    {
+      "op": "relu", 
+      "name": "vgg0_relu10_fwd", 
+      "inputs": [[9, 0, 0]]
+    }, 
+    {
+      "op": "Pad", 
+      "name": "pad19", 
+      "attrs": {
+        "mode": "constant", 
+        "pad_width": "(0, 0, 0, 0, 1, 1, 1, 1)"
+      }, 
+      "inputs": [[10, 0, 0]]
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv11_weight", 
+      "attrs": {"__shape__": "(512, 512, 3, 3)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "null", 
+      "name": "vgg0_conv11_bias", 
+      "attrs": {"__shape__": "(512,)"}, 
+      "inputs": []
+    }, 
+    {
+      "op": "Convolution", 
+      "name": "convolution15", 
+      "attrs": {
+        "dilate": "(1, 1)", 
+        "kernel": "(3, 3)", 
+        "no_bias": "False", 
+        "num_filter": "512", 
+        "num_group": "1", 
+        "stride": "(1, 1)"
+      }, 
+      "inputs": [[11, 0, 0], [12, 0, 0], [13, 0, 0]]
+    }, 
+    {
+      "op": "relu", 
+      "name": "vgg0_relu11_fwd", 
+      "inputs": [[14, 0, 0]]
+    }
+  ], 
+  "arg_nodes": [0, 2, 3, 7, 8, 12, 13], 
+  "node_row_ptr": [
+    0, 
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6, 
+    7, 
+    8, 
+    9, 
+    10, 
+    11, 
+    12, 
+    13, 
+    14, 
+    15, 
+    16
+  ], 
+  "heads": [[15, 0, 0]], 
+  "attrs": {"mxnet_version": ["int", 10500]}
+}

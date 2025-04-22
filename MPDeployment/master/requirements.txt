@@ -1,0 +1,10 @@
+certifi==2019.9.11
+chardet==3.0.4
+idna==2.8
+numpy==1.24.3
+requests==2.22.0
+urllib3==1.25.6
+# pillow
+mxnet==1.5.0
+flask
+gunicorn
