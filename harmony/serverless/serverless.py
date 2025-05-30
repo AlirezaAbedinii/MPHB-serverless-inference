@@ -4,6 +4,7 @@ import requests
 import json
 import harmony.core.cost as cscost
 import harmony.core.util as util
+import time
 
 class HttpFunction():
     def __init__(self, function_url, function_name=None) -> None:
@@ -15,7 +16,7 @@ class HttpFunction():
         for _ in range(5):
             response = requests.get(self.function_url, params=params)
             if response.status_code == 200:
-                return float(json.loads(response.text)['infMs']) / 1000
+                return float(json.loads(response.text)['total_time']) / 600
         return -1.0
 
 class ServerlessRequest():
@@ -37,6 +38,7 @@ class ServerlessForProfile(threading.Thread):
         self.que = que
 
     def send_request(self):
+        time.sleep(0.2)
         return self.function.invoke(self.params)
 
     def run(self):

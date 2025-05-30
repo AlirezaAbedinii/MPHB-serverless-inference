@@ -66,24 +66,26 @@ if __name__ == "__main__":
     start = 0
     app_names = ["app" + str(i) for i in range(1, app_num+1)]
     trace_path = os.path.join(args.config, config["app_path"])
-    traces = [csreqest.Trace(os.path.join(trace_path, app + ".csv"), duration_min, 1.0, start_time=start) for app in app_names]
+    traces = [csreqest.Trace(os.path.join(trace_path, app + ".csv"), duration_min, 1.0, start_time=start) for app in app_names] 
     applications = [csreqest.Application(traces[i], slos[i], app_names[i]) for i in range(app_num)]
 
     
+    MASTER_URL = "https://master-hbihcetbgd.us-east-1.fcapp.run/invoke"
     # init function client 
     default_cpu_cfg = Cfg(harmony.Instance(16, 32, None), 1, 1, 1, 1, 1) #edited by A
     default_gpu_cfg = Cfg(harmony.Instance(16, 32, 24), 1, 1, 1, 1, 1) # edited by A
     cpu_functions : List[Union[csreqest.Function, None]] = []
     # Put the function name and function url here for real serverless inference
     # This is for simulation, so we don't put the real function name and url here
-    idle_cpu_functions : List[Union[csreqest.Function, None]] = [csreqest.Function("", "", default_cpu_cfg, config) for _ in range(app_num)]
+    idle_cpu_functions : List[Union[csreqest.Function, None]] = [csreqest.Function("master", MASTER_URL, default_cpu_cfg, config) for _ in range(app_num)]
     gpu_functions : List[Union[csreqest.Function, None]] = []
-    idle_gpu_functions : List[Union[csreqest.Function, None]] = [csreqest.Function("", "", default_gpu_cfg, config) for _ in range(app_num)]
+    idle_gpu_functions : List[Union[csreqest.Function, None]] = [csreqest.Function("master", MASTER_URL, default_gpu_cfg, config) for _ in range(app_num)]
 
 
     results = []
     predicted_costs = []
     ts = []
+    print("experiments duration is: ", duration_min)
     for iter in range(duration_min):
         print("time: ", iter)
         apps = [app.get_app(iter) for app in applications]
@@ -95,7 +97,7 @@ if __name__ == "__main__":
         groups, cost = harmony.Algorithm(apps)
         t2 = time.time()
         t = int((t2-t1) * 1000)
-        print(t)
+        print("time is: ",t)
         ts.append(t)
         predicted_costs.append(cost)
         # print(groups)

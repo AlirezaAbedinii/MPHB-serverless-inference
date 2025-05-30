@@ -3,7 +3,7 @@ import harmony
 from harmony.core.util import App
 
 if __name__ == "__main__":
-    apps_list = [App("app0", 0.5, 15), App("app1", 0.6, 20), App("app2", 0.8, 15), App("app3", 1, 25),App("app4", 0.2, 2),App("app5", 1.5, 25)]
+    apps_list = [App("app1", 6.0, 0.1), App("app2", 4.5, 0.2), App("app3", 5.5, 0.15),App("app4", 3, 0.3)]
     groups, cost = harmony.Algorithm(apps_list)
     print("Provisioning plan:")
     for i in range(len(groups)):

@@ -37,7 +37,7 @@ class Application:
 
     def get_app(self, iter):
         rps = self.trace.get_trace()[iter]
-        return util.App(self.name, self.slo, float(rps) / 60)
+        return util.App(self.name, self.slo, float(rps) / 100)
     
 class Result:
     def __init__(self, cfg : util.Cfg, requests : List[serverless.ServerlessRequest]) -> None:
@@ -89,6 +89,9 @@ def generate_requests_helper(apps : List[util.App], batch_size: int, time_out: L
             count = 0
             total_delay = 0.0
             time.sleep(delay)
+            # hard throttle A
+            if delay < 0.1:
+                time.sleep(0.1)
         else:
             time.sleep(current_timeout - total_delay)
             delay_reminder = delay - (current_timeout - total_delay)
@@ -104,6 +107,11 @@ def generate_requests_helper(apps : List[util.App], batch_size: int, time_out: L
             count = 0
             total_delay = 0.0
             time.sleep(delay_reminder)
+            # hard throttle A
+            if delay_reminder < 0.1:
+                time.sleep(0.1)
+        
+        
         
         time_stamp += delay
         if time_stamp >= duration_min * 60:
@@ -144,7 +152,7 @@ class Sample:
             access_key_id=access_key_id,
             access_key_secret=access_key_secret
         )
-        config.endpoint = f'1712221082273020.cn-shanghai.fc.aliyuncs.com'
+        config.endpoint = f'5096935942071593.us-east-1.fc.aliyuncs.com'
         return FC20230330Client(config)
 
     @staticmethod
@@ -167,7 +175,7 @@ class Sample:
             update_function_input = fc20230330_models.UpdateFunctionInput(
                 cpu=cpu,
                 memory_size=mem,
-                gpu_config=fc20230330_models.GPUConfig(gpu * 1024, "fc.gpu.ampere.1")
+                gpu_config=fc20230330_models.GPUConfig(gpu * 1024, "fc.gpu.tesla.1")
             )
         update_function_request = fc20230330_models.UpdateFunctionRequest(
             body=update_function_input
@@ -214,6 +222,7 @@ class Function:
             c = cfg.instance.cpu
             # if c > 8:
             #     c = round(c, 1)
+            
             m = cfg.instance.mem
             if m  < c:
                 m = c
@@ -221,6 +230,13 @@ class Function:
             m = int(m * 1024)
             if m % 64 != 0:
                 m = (m // 64) * 64 + 64
+                
+            m = 2048
+            c = round(2*c, 1)
+            c = c/2 
+            # c = min(c, g/2)
+            print("c", c)
+            
             if g is None:
                 if Sample.main(self.function_name, c, m) is True:
                     print("cpu function change resource success")
@@ -233,6 +249,7 @@ class Function:
                 else:
                     print("gpu function change resource fail")
                     exit(0)
+            
         self.cfg = cfg
     
     def start(self, duration_min : int):
