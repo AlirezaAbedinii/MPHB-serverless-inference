@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Models and large artifacts
+*.onnx
+*.params
+*.pth
+*.h5
+*.tar.gz
+*.tgz
+partitioning/partition/models/*
+!partitioning/partition/models/.gitkeep
+*_workspace/
+
+# Profiling and experiment outputs
+result.csv
+*.log
+
+# Credentials — never commit real keys
+.env
+*.pem
+credentials*
